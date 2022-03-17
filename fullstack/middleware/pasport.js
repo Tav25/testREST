@@ -8,11 +8,12 @@ const options = {
   secretOrKey: keys.jwtKey,
 };
 
-module.exports = function (passport) {
+module.exports = (passport) => {
   passport.use(
     new JwtStrategy(options, async (payload, done) => {
       try {
         const user = await User.findById(player.userId).select("email id");
+        // console.log(">>>>" + user);
 
         if (user) {
           done(null, user);
