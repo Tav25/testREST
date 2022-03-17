@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 
-const passport = require("passport");
 
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
@@ -11,12 +10,13 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 mongoose
-  .connect(keys.mongoURI)
-  .then(() => console.log("MB Connect"))
-  .catch(() => console.log('error'));
+.connect(keys.mongoURI)
+.then(() => console.log("MB Connect"))
+.catch(() => console.log('error'));
 
+const passport = require("passport");
 app.use(passport.initialize())
-require('./middleware/pasport')
+require('./middleware/passport')(passport)
 
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posting");
