@@ -1,11 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
+const passport = require("passport");
+
 //!
 const controller = require("../controllers/posting");
 
 // localhost:3000/api/post/new
-router.get("/new", controller.new);
+router.get(
+  "/new",
+  passport.authenticate("jwt", { session: false }),
+  controller.new
+);
 
 // localhost:3000/api/post/edit
 router.get("/edit", controller.edit);
