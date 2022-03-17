@@ -16,7 +16,7 @@ mongoose
   .catch(() => console.log('error'));
 
 app.use(passport.initialize())
-require('./middleware/pasport')
+require('./middleware/passport')
 
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posting");

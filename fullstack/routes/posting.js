@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 
-require('../middleware/pasport')(passport);
+// require('../middleware/passport')(passport);
 
 //!
 const controller = require("../controllers/posting");
