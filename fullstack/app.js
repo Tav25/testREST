@@ -9,7 +9,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 mongoose
-  .connect('mongodb+srv://tav25:xqxZsLIdyFzvP6Vk@cluster0.vvahu.mongodb.net/restApi?retryWrites=true&w=majority')
+  .connect(keys.mongoURI)
   .then(() => console.log("MB Connect"))
   .catch(() => console.log('error'));
 
