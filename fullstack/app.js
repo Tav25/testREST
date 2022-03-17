@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+const passport = require("passport");
+
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
 
@@ -13,9 +15,9 @@ mongoose
   .then(() => console.log("MB Connect"))
   .catch(() => console.log('error'));
 
+app.use(passport.initialize())
+require('./middleware/pasport')
 
-
-////
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posting");
 
