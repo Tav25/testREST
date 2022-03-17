@@ -11,6 +11,9 @@ const postRoutes = require("./routes/posting");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(morgan('dev'));
+app.use(cors());
+
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 
