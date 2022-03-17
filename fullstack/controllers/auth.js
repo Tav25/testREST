@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs')
+const bcrypt = require("bcryptjs");
 
 const User = require("../models/User");
 
@@ -23,18 +23,21 @@ module.exports.register = async function (req, res, next) {
 
   if (candidate) {
     console.log("cand yes");
+
     res.status(409).json({ message: "User is already registered" });
   } else {
     // console.log("cand no");
+    const salt = bcrypt.genSaltSync(10);
+    const password = req.body.password;
     const user = new User({
       email: req.body.email,
-      password: req.body.password,
+      password: bcrypt.hashSync(password, salt),
     });
-    try{
+    try {
       await user.save().then(() => console.log("User create"));
-      res.status(201).json({ message: "User registered" });
-    }catch(e){
-      console.log("Error")
+      res.status(201).json(user);
+    } catch (e) {
+      console.log("Error");
     }
   }
 };
