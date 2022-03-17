@@ -2,10 +2,33 @@ const bcrypt = require("bcryptjs");
 
 const User = require("../models/User");
 
-module.exports.login = function (req, res, next) {
-  res.status(200).json({
-    login: req.body,
-  });
+module.exports.login = async function (req, res, next) {
+  // res.status(200).json({
+  //   login: req.body,
+  // });
+
+  candidate = await User.findOne({ email: req.body.email });
+
+  if (candidate) {
+    console.log("cand yes");
+
+    // res.status(409).json({ message: candidate });
+
+    const passwordResult = bcrypt.compareSync(
+      req.body.password,
+      candidate.password
+    );
+    // res.status(200).json({ message: passwordResult });
+    if (passwordResult) {
+      res.status(200).json({ message: "pass true" });
+
+      
+    } else {
+      res.status(200).json({ message: "pass false" });
+    }
+  } else {
+    res.status(404).json({ message: "User no found" });
+  }
 };
 
 module.exports.register = async function (req, res, next) {
